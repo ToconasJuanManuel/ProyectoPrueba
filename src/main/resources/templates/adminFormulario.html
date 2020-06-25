@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <!-- Fontawesome 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+-->
+    <title>Admin</title>
+  </head>
+
+  <body >
+  
+  <!-- ********************    ******************************** -->
+ <!-- ********** Insercion del header **************** -->
+  	<div th:insert="layout/header :: header"></div> 
+
+
+  	
+
+  <!-- **************** insercion de la barra de navegacion*********************  -->
+  
+ <div class="nav bg-dark pt-3 pb-3 font-weight-bold fuente">
+	<div class="col-8">
+		<ul class="nav nav-tabs ">
+			<li class="nav-item">
+				<a class="nav-link text-white " href="adminPrincipal">Ver
+					Todo
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link text-white" href="adminRegistrador">Registradores
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link text-white" href="adminConsultor">Consultores
+				</a>
+			</li>
+
+			<li class="nav-item">
+			    <a class="nav-link text-white" href="adminLocalidad">Localidades
+			    </a>
+			</li>
+
+			<li class="nav-item">
+				<a class="btn btn-primary font-weight-bold disabled" href="adminFormulario">Añadir
+					Usuario
+				</a>
+			</li>
+		</ul>
+
+	</div>
+
+	<div class="col-4 pr-4">
+		<form class=" float-right form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2 " type="search"
+				placeholder="Search by dni" aria-label="Search">
+			<button class="btn btn-primary my-2 my-sm-0 desabled" type="submit">Search</button>
+		</form>
+	</div>
+</div>
+<!-- **************** Find de la barra de navegacion*********************  -->
+
+<!-- ******** Formulario Registro de Usuario ****************-->
+<div class="container-fluid bg-white">
+<div class="row justify-content-center fuente pt-4 pb-4 ">
+	<div class="col-11 col-md-4 bg-primary text-center text-white lateral">
+		<div>
+			<i class="fas fa-user-plus fa-7x" ></i>
+				<h3>FORMULARIO<br> NUEVO USUARIO</h3>	
+		</div>	
+	</div>
+
+	<div class="col-11 col-md-6 border border-primary pt-4 pb-4">
+		<h4>Informacion del Usuario</h4>
+		<form class="form col-11" th:action="@{/save}" th:object=${usuario} method="POST"> <!-- SE TRABAJA CON THYMELEAF -->
+
+		  <input type="hidden" th:field = "*{id}"/>
+			
+		  <div class="form-group">
+		      <label for="nombreUsuario">Nombre de Usuario</label>
+		      <input th:field = "*{nombreUsuario}" type="text" placeholder="Nombre de Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0 " id="nombreUsuario1" value="" required>
+		   </div>
+
+		    <div class="form-group">
+		      <label for="password">Password</label>
+		      <input th:field = "*{password}" type="text" placeholder="Password" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="password" value="" required>
+		   </div>
+
+		   <div class="form-group">
+		      <label for="nombreReal">Nombre Real del Usuario</label>
+		      <input th:field = "*{nombreReal}" type="text" placeholder="Nombre Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="nombreReal" value="" required>
+		   </div>
+
+		    <div class="form-group">
+		      <label for="apellidoReal">Apellido Real del Usuario</label>
+		      <input th:field = "*{apellidoReal}" type="text" placeholder="Apellido Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="apellidoReal" value="" required>
+		   	</div>
+
+		   	<fieldset class="form-group">
+								<div class="row">
+									<legend class="col-form-label col-12 col-md-3 pt-0">Tipo
+										de Usuario</legend>
+									<div class="col-12 col-md-9">
+										<div class="form-check">
+											<input class="form-check-input" type="radio"
+												name="gridRadios" id="gridRadios1" value="registrador" checked
+												th:field = "*{tipoUsuario}">
+											<label class="form-check-label" for="gridRadios1">
+												REGISTRADOR </label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio"
+												name="gridRadios" id="gridRadios2" value="consultor"
+												th:field = "*{tipoUsuario}">
+											<label class="form-check-label" for="gridRadios2">
+												CONSULTOR </label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+
+							<div class="form-group row justify-content-end">
+								<div class="">
+									<button type="submit" class="btn btn-primary">GUARDAR</button>
+									<button type="button" class="btn btn-danger">CANCELAR</button>
+								</div>
+							</div>
+		</form>
+
+	</div>
+	
+</div>
+</div>
+
+<!-- ******** Fin de Formulario ****************-->
+
+	<!-- Insercion del fragmento footer utlizando thymeleaf --> 
+	<div th:insert="layout/footer :: footer"></div>
+
+  </body>
+</html>
