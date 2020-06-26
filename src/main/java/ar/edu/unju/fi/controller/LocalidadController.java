@@ -43,8 +43,8 @@ public class LocalidadController {
 	
 	@GetMapping("/editarLoc/{id}")
 	public String editar(@PathVariable Long id, Model model) {
-		Optional<Localidad>usuario=localidadService.EditarLoc(id);
-		model.addAttribute("usuario", usuario);
+		Optional<Localidad>localidadForm=localidadService.EditarLoc(id);
+		model.addAttribute("localidadForm", localidadForm);
 		return "adminLocalidad";
 	}
 

@@ -64,7 +64,7 @@
 				</div>
 				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post" autocomplete="off">
 					
-					<input type="hidden" th:field ="${localidadForm.id}" />
+					 <input type="hidden" th:field="*{id}" /> 
 					
 					<div class="form-group"> 
 						 <label for="Localidad">Nombre de Localidad</label>
