@@ -62,12 +62,14 @@
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4>AÑADIR </h4>
 				</div>
-				
-				<form class="form pt-4 " th:action="@{/saveLoc}" th:object=${localidad} method="POST" >
-					<input type="hidden" th:field = "*{id}"/>
-					<div class="form-group" > 
+				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post" autocomplete="off">
+					
+					<input type="hidden" th:field ="${localidadForm.id}" />
+					
+					<div class="form-group"> 
 						 <label for="Localidad">Nombre de Localidad</label>
-   						 <input th:field="*{nombre}" type="text"  class="form-control border border-dark border-top-0 border-left-0 border-right-0 " id="localidad" placeholder="Ingrese Nombre">
+   						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
+						
 					</div>
 					<input type="submit" name="Registrar" value="Guardar" class="  col-12 btn btn-primary btn-lg float-right">
 					
@@ -81,15 +83,18 @@
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">
 				<table class="table table-reponsive table-striped">
 					<thead>
+						<th>ID</th>
 						<th>Localidad</th>
 						<th class="text-center">Accion</th>
 					</thead>
+					
 					<tbody>
-						<tr th:each = "localidad:${localidades}">
-							<td th:text = "*{localidad.nombre}" > </td>
+						<tr th:each="localidad : ${listaLocalidades}">
+							<td th:text="${localidad.id}"></td>
+							<td th:text="${localidad.nombre}"></td>
 							<td class="text-center">
-								 	<a th:href="@{/editarLoc/}+${localidad.id}" type="button" class="btn btn-primary"> Editar</a>
-									<a th:href="@{/eliminarLoc/}+${localidad.id}" type="button" class="btn btn-danger">Eliminar</a>
+								<a th:href="@{/editarLoc/}+${localidad.id}" type="button" class="btn btn-primary"> Editar</a>
+								<a th:href="@{/eliminarLoc/}+${localidad.id}" type="button" class="btn btn-danger">Eliminar</a>
 							</td>
 						</tr>
 					</tbody>

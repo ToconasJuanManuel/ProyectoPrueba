@@ -1,49 +1,73 @@
 package ar.edu.unju.fi.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.repository.IUsuarioDAO;
+import java.util.Optional;
 
+/**
+ * Clase que va a implementar la interface IUsuarioService.
+ * 
+ * @author Marcia Velarde
+ *
+ */
 @Service
-public class UsuarioServiceImp implements IUsuarioService {
+public class UsuarioServiceImp implements IUsuarioService{
 
-	//La capa de servicio necesita establecer comunicacion con la interfaz del repositorio asi que se autoinyecta una objeto de este tipo
 	@Autowired
-	IUsuarioDAO usuarioDaoImp;
+	private IUsuarioDAO iUsuario;
+
+	@Override
+	public Usuario crear(Usuario unUsuario) throws Exception {
+		if(checkNombreUsuario(unUsuario)) {
+			iUsuario.save(unUsuario);
+		}
+		return unUsuario;
+	}
+
+	private boolean checkNombreUsuario (Usuario usuario) throws Exception{
+		Optional<Usuario> usuarioEncontrado = iUsuario.findByNombreUsuario(usuario.getNombreUsuario());
+		if(usuarioEncontrado.isPresent()){
+			throw new Exception("Nombre de usuario no disponible");
+		}
+		return true;
+	}
 	
 	@Override
-	public void guardarUsuario(Usuario usuario) {
-		usuarioDaoImp.save(usuario);
-	//Se usan los metodos del CRUD repository . save permite guardar si se pasa el metodo del parametro
+	public Usuario modificar(Usuario unUsuario) throws Exception {
+		Usuario usuarioGuardar = encontrarUsuario(unUsuario.getId());
+		mapearUsuario(unUsuario,usuarioGuardar);
+		return iUsuario.save(usuarioGuardar);
+	}
+
+	private void mapearUsuario(Usuario desde, Usuario hacia) {
+		hacia.setNombreReal(desde.getNombreReal());
+		hacia.setApellidoReal(desde.getApellidoReal());
 	}
 
 	@Override
-	public List<Usuario> listarUsuario() {
-		//return usuarioDaoImp.findAll();
-		return usuarioDaoImp.listarUsuario();
+	public Usuario encontrarUsuario(Long id) throws Exception {
+		return iUsuario.findById(id).orElseThrow(()-> new Exception("El usuario no existe"));
 	}
-
-	@Override
-	public Optional<Usuario> listarId(Long id) {
-		return usuarioDaoImp.findById(id);
-	}
-
-	@Override
-	public void eliminarUsuario(Long id) {
-		usuarioDaoImp.deleteById(id);
-		
-	}
-
-	@Override
-	public List<Usuario> findByTipoUsuario(String tipoUsuario) {		
-		return usuarioDaoImp.findByTipoUsuario(tipoUsuario) ;
-	}
-
 	
+	@Override
+	public void eliminar(Long id) {
+		iUsuario.deleteById(id);
+	}
+
+	@Override
+	public Iterable<Usuario> listarUsuarios() {
+		return iUsuario.findAll();
+	}
+
+	@Override
+	public List<Usuario> findByTipoUsuario(String tipoUsuario) {
+		List<Usuario> usuarios = iUsuario.findByTipoUsuario(tipoUsuario);
+		return usuarios;
+	}
 
 }

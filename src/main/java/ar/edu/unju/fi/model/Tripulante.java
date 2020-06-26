@@ -201,5 +201,9 @@ public class Tripulante implements Serializable{
 	public String toString() {
 		return "Tripulante [id=" + id + ", documento=" + documento + ", apellido=" + apellido + ", nombres=" + nombres
 				+ ", nacionalidad=" + nacionalidad + "]";
-	}	
+	}
+	
+	
+	
+	
 }

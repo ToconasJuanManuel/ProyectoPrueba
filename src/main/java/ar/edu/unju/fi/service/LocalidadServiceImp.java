@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,32 +8,36 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.model.Localidad;
 import ar.edu.unju.fi.repository.ILocalidadDAO;
 
+/**
+ * Clase que va a implementar la interface ILocalidadService.
+ * 
+ * @author Marcia Velarde, Juan Toconas
+ *
+ */
 @Service
-public class LocalidadServiceImp implements ILocalidadService {
-	
+public class LocalidadServiceImp implements ILocalidadService{
+
 	@Autowired
-	ILocalidadDAO locDaoImp;
-
-
+	private ILocalidadDAO iLocalidad;
+	
 	@Override
-	public List<Localidad> listarlocalidad() {
-		return locDaoImp.listarLocalidad();
+	public void crearLocalidad(Localidad localidad) {
+		iLocalidad.save(localidad);
 	}
 
 	@Override
-	public void guardarLocalidad(Localidad localidad) {
-		locDaoImp.save(localidad);
-	}
-
-	@Override
-	public Optional<Localidad> EditarLoc (Long id) {
-		return locDaoImp.findById(id);
+	public Iterable<Localidad> listarLocalidades() {
+		return iLocalidad.findAll();
 	}
 
 	@Override
 	public void eliminarLocalidad(Long id) {
-		locDaoImp.deleteById(id);
-		
+		iLocalidad.deleteById(id);		
+	}
+
+	@Override
+	public Optional<Localidad> EditarLoc(Long id) {
+		return iLocalidad.findById(id);
 	}
 
 }
