@@ -22,6 +22,8 @@ public class LocalidadServiceImp implements ILocalidadService{
 	
 	@Override
 	public void crearLocalidad(Localidad localidad) {
+		String X = localidad.getNombre().toLowerCase();
+		localidad.setNombre(X);
 		iLocalidad.save(localidad);
 	}
 

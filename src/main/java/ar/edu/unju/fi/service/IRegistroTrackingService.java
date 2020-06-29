@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.service;
 
-public interface IRegistroTrackingService {
+import ar.edu.unju.fi.model.RegistroTracking;
 
+public interface IRegistroTrackingService {
+	
+	public void guardarR(RegistroTracking reg);
+		
 }

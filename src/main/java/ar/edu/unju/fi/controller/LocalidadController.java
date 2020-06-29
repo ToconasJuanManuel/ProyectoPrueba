@@ -29,6 +29,7 @@ public class LocalidadController {
 	
 	@PostMapping("/adminLocalidad")
 	public String crearLocalidad(@ModelAttribute("localidadForm") Localidad localidad, ModelMap model) {
+		
 		localidadService.crearLocalidad(localidad);
 		model.addAttribute("localidadForm", new Localidad());
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
