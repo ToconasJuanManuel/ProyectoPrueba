@@ -119,14 +119,14 @@
 				
 				<div class="form-group col-mb-3 mx-1 ">
 					<label for="lista"> LISTA DE LOCALIDADES</label> 
-						<select class="custom-select " id="lista" required>
-						<option th:each="localidad :${listaLocalidades}" th:value="${localidad.id}" th:text="${localidad.id}"   } ></option>
-					</select>
+						<select  class="custom-select " id="lista" required>
+							<option th:each="localidad:${listaLocalidades}" th:value="${localidad.id}" th:text="${localidad.nombre}"  th:field =*{localidad.id} } ></option>
+						</select>
 				</div>
 			
 				<div class="form-group col-mb-2">
 					<label for="detalle">DETALLES DEL LUGAR</label>
-					<input th:field =*{vehiculos.titular}  type="text" class="form-control" id="detalle" placeholder="DETALLES DEL LUGAR">					    
+					<input th:field =*{detalleLugarRegistro}  type="text" class="form-control" id="detalle" placeholder="DETALLES DEL LUGAR">					    
 				</div>
 				
 				<div class="form-group col-mb-3 mx-1 my-auto">
