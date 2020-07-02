@@ -8,7 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<!-- 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    
+    <link rel="stylesheet" type="text/css" href="css/admin.css" th:href="@{/css/admin.css}" >
     
     <title>Admin</title>
   </head>
@@ -17,7 +18,7 @@
   
   <!-- ********************    ******************************** -->
  <!-- ********** Insercion del header **************** -->
-  	<div th:insert="layout/header :: header"></div> 
+  	<div th:insert="layout/headerDos :: headerDos"></div> 
 
 
   	

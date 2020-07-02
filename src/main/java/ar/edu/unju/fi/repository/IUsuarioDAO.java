@@ -19,5 +19,8 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	public List<Usuario> findByTipoUsuario(String tipoUsuario);
 
 	public Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+	
+	//OPTIONAL DEVUELVE NULL EN CASO DE QUE SE BUSQUE Y NO SE ENCUENTRE
+	public Optional<Usuario> findByNombreUsuarioAndPassword(String nombre, String Apellido);
 
 }

@@ -3,6 +3,7 @@ package ar.edu.unju.fi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.model.Usuario;
@@ -22,10 +23,11 @@ public class UsuarioServiceImp implements IUsuarioService{
 	private IUsuarioDAO iUsuario;
 
 	@Override
-	public Usuario crear(Usuario unUsuario) throws Exception {
-		if(checkNombreUsuario(unUsuario)) {
-			iUsuario.save(unUsuario);
-		}
+	public Usuario crear(Usuario unUsuario) {
+		String contraseña = unUsuario.getPassword();
+		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder(4);
+		unUsuario.setPassword(encriptador.encode(contraseña));
+		iUsuario.save(unUsuario);
 		return unUsuario;
 	}
 

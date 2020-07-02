@@ -1,0 +1,14 @@
+<html>
+<body>
+
+	<div id="headerDos" th:fragment="headerDos" class="header col-sm-12 p-4 bg-dark text-white">
+		<p class="h3 m-auto text-green">
+			<img class="middle" width="75" height="auto" src="images/logo_header.png" th:src="@{/images/logo_header.png}">Tracking de Personas</p>
+			<a class="btn btn btn-danger" href="#" th:href="@{/logout}"> LOG OUT </a>
+			<p>  Bienvenido usuario : <span th:text=${#authentication.getPrincipal().getUsername()}>  </span> </p>
+			
+	</div>
+	
+
+</body>
+</html>

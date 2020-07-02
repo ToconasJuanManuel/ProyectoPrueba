@@ -42,6 +42,21 @@ public class RegistradorController {
 		return "registradorVehiculos";
 	}
 	
+	@GetMapping("/rrform")
+	public String rRForm(Model model) {
+		return "rRForm";
+	}
+	
+	@GetMapping("/rtform")
+	public String rTForm(Model model) {
+		return "rtForm";
+	}
+	
+	@GetMapping("/rvform")
+	public String rVForm(Model model) {
+		return "rvform";
+	}
+	
 	@GetMapping("/regvis")
 	public String registradorVistas(Model model) {
 		return "registradorVista";
