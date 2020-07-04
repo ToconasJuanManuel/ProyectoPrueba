@@ -33,15 +33,15 @@ class ProyectoPrueba1ApplicationTests {
 		imp.crear(usuario2);
 		*/
 		
-		/*
-		Usuario usuario3 = new Usuario();
-		usuario3.setApellidoReal("C");
-		usuario3.setNombreReal("C");
-		usuario3.setNombreUsuario("REG");
-		usuario3.setPassword("1234");
-		usuario3.setTipoUsuario("REGISTRADOR");
-		imp.crear(usuario3);
-		*/
+		
+		Usuario usuario4 = new Usuario();
+		usuario4.setApellidoReal("George");
+		usuario4.setNombreReal("George");
+		usuario4.setNombreUsuario("G");
+		usuario4.setPassword("1234");
+		usuario4.setTipoUsuario("REGISTRADOR");
+		imp.crear(usuario4);
+		
 	}
 	
 }

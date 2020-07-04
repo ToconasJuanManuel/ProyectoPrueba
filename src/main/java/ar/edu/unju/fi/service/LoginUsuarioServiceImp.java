@@ -2,7 +2,6 @@ package ar.edu.unju.fi.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,12 +36,12 @@ public class LoginUsuarioServiceImp implements UserDetailsService {
 		
 		//Listado granted que guarda el tipo de usuario en una lista que recibe el tipo del usuario encontrado
 		List<GrantedAuthority> tipos = new ArrayList<>();
-		GrantedAuthority garantia = new SimpleGrantedAuthority(encontrado.getTipoUsuario());
-		tipos.add(garantia);
+		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(encontrado.getTipoUsuario());
+		tipos.add(grantedAuthority);
 		
 		//No devuelvo el usuario encontrado sino algunos campos del mismo (PASO 2 DEFINIR EL RETURN USER CON SUS DATOS PERO FALTA CREAR LISTA DE ROLES que es tipos)
 		//SE CREA USER DE SECURITY
-		UserDetails login = (UserDetails) new User(username, encontrado.getPassword(), tipos);
-	return login;
+		UserDetails user = (UserDetails) new User(username, encontrado.getPassword(), tipos);
+	return user;
 	}
 }

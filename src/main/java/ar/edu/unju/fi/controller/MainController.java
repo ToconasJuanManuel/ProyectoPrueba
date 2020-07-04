@@ -26,4 +26,14 @@ public class MainController {
 		return "login2";
 	}
 	
+	@RequestMapping("/sinPermisos")
+	public String sinPermisos() {
+		return "sinPermisos";
+	}
+	
+
+	
+	
+	
+	
 }

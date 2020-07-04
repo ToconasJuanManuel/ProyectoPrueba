@@ -30,7 +30,7 @@ public class AutenticacionSuccessHandler implements AuthenticationSuccessHandler
 			//Se prueba con el Collection de java pero cuidado que puede cambiar
 			Collection <? extends GrantedAuthority > authorities = authentication.getAuthorities();
 			for (GrantedAuthority grantedAuthority : authorities) {
-				if (grantedAuthority.getAuthority().equalsIgnoreCase("BD")) {
+				if (grantedAuthority.getAuthority().equals("BD")) {
 					tipoBD = true;
 					break;
 				}else {
@@ -54,6 +54,8 @@ public class AutenticacionSuccessHandler implements AuthenticationSuccessHandler
 				}else {
 					if(tipoRegistrador) {
 						redirectStrategy.sendRedirect(request, response, "/registrador");
+					}else {
+						throw new IllegalStateException();	
 					}
 						}
 					}

@@ -24,8 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		"/include/**","/css/**","/icons/**","/images/**","/js/**","/layer/**","/webjars/**",
 		//frag, carpetas
 	};
-	
-	
+		
 	//Se SobreEscribe el metodo configure
 	//Recibe una peticion de tipo HTTP
 	@Override
@@ -34,18 +33,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 				.antMatchers(resources).permitAll() //los recursos de arriba
-				.antMatchers("/","home").permitAll() // requetimiento a slash y slash home
-				//.antMatchers("/adminFormulario").hasRole("BD") //url que no quiero permitir o permitir en determinado rol
-				//.antMatchers("/buscarPatente").hasRole("CONSULTOR") 
-				//.antMatchers("/adminFormulario").not().hasAuthority("ROLE_CANDIDATE")
-				//.antMatchers("/adminFormulario","/adminPrincipal","/adminRegistrador","/adminLocalidad").not().hasAuthority("CONSULTOR")
-				//.antMatchers("/adminFormulario","/adminPrincipal","/adminRegistrador","/adminLocalidad","/vehiculo","/tripulante","/patente").not().hasAuthority("REGISTRADOR")
-				//.antMatchers("/adminFormulario","/adminPrincipal","/adminRegistrador","/adminLocalidad","/registrador").not().hasAuthority("CONSULTOR")
-				//.antMatchers("/registrador","/vehiculo","/tripulante","/patente").not().hasAuthority("BD")
-				//.antMatchers("/adminFormulario").access("hasRole('ROLE_BD')")
-				//.antMatchers("/userPage").access("hasRole('ROLE_USER')")
-				//.antMatchers("/adminPage").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/","/login").permitAll() // requetimiento a slash y slash home
+								
+				.antMatchers("/adminFormulario").hasAuthority("BD")
+				.antMatchers("/adminPrincipal").hasAuthority("BD")
+				.antMatchers("/adminRegistrador").hasAuthority("BD")
+				.antMatchers("/adminLocalidad").hasAuthority("BD")
 				
+				.antMatchers("/registrador").hasAuthority("REGISTRADOR")
+				
+				.antMatchers("/vehiculo").hasAuthority("CONSULTOR")
+				.antMatchers("/patente").hasAuthority("CONSULTOR")
+				.antMatchers("/tripulante").hasAuthority("CONSULTOR")
+	
 				
 				.anyRequest().authenticated() //todo lo demas requiere autenticacion
 				.and()
@@ -58,9 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.passwordParameter("password")
 				.and()
 			.logout()
-				.permitAll();
-				//.logoutSuccessUrl("/login?logout")
+            	.clearAuthentication(true)
+				.permitAll()
+				.and()
+			.exceptionHandling().accessDeniedPage("/sinPermisos");
+		
 			http.csrf().disable(); //impide que se puedan hacer fishing
+			
 	}
 	
 	//paso 2 -> encriptacion de la clave
